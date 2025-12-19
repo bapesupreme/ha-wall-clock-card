@@ -147,12 +147,7 @@ export class PirateWeatherProvider implements WeatherProvider {
                 windDirection: windDirection,
                 uvIndex: currently.uvIndex
             },
-            daily: daily.slice(0, 7).map(day => this.transformDailyWeather(day)),
-            location: {
-                latitude: data.latitude,
-                longitude: data.longitude,
-                timezone: data.timezone
-            }
+            daily: daily.slice(0, 7).map(day => this.transformDailyWeather(day))
         };
     }
 
@@ -179,19 +174,19 @@ export class PirateWeatherProvider implements WeatherProvider {
      */
     private mapIconToCondition(icon: string): Weather {
         const iconMap: Record<string, Weather> = {
-            'clear-day': Weather.Clear,
-            'clear-night': Weather.Clear,
+            'clear-day': Weather.ClearSky,
+            'clear-night': Weather.ClearSky,
             'rain': Weather.Rain,
             'snow': Weather.Snow,
             'sleet': Weather.Snow,
-            'wind': Weather.Wind,
-            'fog': Weather.Fog,
+            'wind': Weather.Clouds,
+            'fog': Weather.Mist,
             'cloudy': Weather.Clouds,
             'partly-cloudy-day': Weather.Clouds,
             'partly-cloudy-night': Weather.Clouds,
             'hail': Weather.Snow,
-            'thunderstorm': Weather.Thunderstorm,
-            'tornado': Weather.Extreme
+            'thunderstorm': Weather.Rain,
+            'tornado': Weather.Clouds
         };
 
         return iconMap[icon] || Weather.All;
