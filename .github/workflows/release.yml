@@ -22,6 +22,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: /home/runner/work/ha-wall-clock-card/ha-wall-clock-card/dist/wall-clock-card-pirate-weather.js
-          asset_name: wall-clock-card-pirate-weather.js
+          asset_name: wall-clock-card-pirateweather.js
           tag: ${{ github.ref }}
           overwrite: true
