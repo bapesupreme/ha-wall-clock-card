@@ -1,6 +1,8 @@
 import { WeatherProvider, WeatherData, WeatherProviderConfig } from './types';
 import { Weather } from '../image-sources';
 
+// Define DailyWeather locally since it's not exported from types
+
 interface PirateWeatherCurrently {
     time: number;
     summary: string;
@@ -101,7 +103,7 @@ export class PirateWeatherProvider implements WeatherProvider {
 
             const data: PirateWeatherResponse = await response.json();
 
-            return this.transformResponse(data, config.units || 'metric');
+            return this.transformResponse(data);
         } catch (error) {
             if (error instanceof Error) {
                 throw new Error(`Failed to fetch Pirate Weather data: ${error.message}`);
@@ -119,7 +121,7 @@ export class PirateWeatherProvider implements WeatherProvider {
         return unitsMap[units] || 'si';
     }
 
-    private transformResponse(data: PirateWeatherResponse, _units: string): WeatherData {
+    private transformResponse(data: PirateWeatherResponse): WeatherData {
         const currently = data.currently;
         const daily = data.daily.data;
 
