@@ -589,7 +589,7 @@ declare global {
 // Add card to window.customCards
 window.customCards = window.customCards || [];
 window.customCards.push({
-    type: 'wall-clock-card',
-    name: 'Wall Clock Card',
+    type: 'wall-clock-card-pirateweather',
+    name: 'Wall Clock Card (Pirate Weather)',
     description: 'A card that displays a clock with seconds and the current date',
 });
