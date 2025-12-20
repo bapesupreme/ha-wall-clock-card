@@ -579,13 +579,6 @@ export class WallClockCard extends LitElement {
     // Weather-related methods are now handled by the WeatherComponent
 }
 
-// Add card to window for type checking
-declare global {
-    interface Window {
-        customCards: any[];
-    }
-}
-
 // Register the custom element if not already registered
 if (!customElements.get('wall-clock-card-pirateweather')) {
     customElements.define('wall-clock-card-pirateweather', WallClockCard);
