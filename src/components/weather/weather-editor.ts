@@ -11,6 +11,7 @@ export class WeatherEditor extends BaseEditorSection {
     private _weatherProviderOptions = [
         {value: 'none', label: 'None (Disable Weather)'},
         {value: 'openweathermap', label: 'OpenWeatherMap'},
+        {value: 'pirateweather', label: 'Pirate Weather'},  // Added Pirate Weather
     ];
 
     // Units options
@@ -90,6 +91,68 @@ export class WeatherEditor extends BaseEditorSection {
                                 .value=${this.config.weatherConfig?.apiKey || ''}
                                 .label= ${"API Key"}
                                 .helper= ${"OpenWeatherMap API Key"}
+                                propertyName="weatherConfig.apiKey"
+                                @value-changed=${this._handleFormValueChanged}
+                        ></ha-row-selector>
+
+                        <ha-row-selector
+                                .hass=${this.hass}
+                                .selector=${{
+                                    number: {
+                                        min: -90,
+                                        max: 90,
+                                        step: 0.0001,
+                                        mode: "box"
+                                    }
+                                }}
+                                .value=${this.config.weatherConfig?.latitude || 50.0755}
+                                .label=${"Latitude"}
+                                propertyName="weatherConfig.latitude"
+                                @value-changed=${this._handleFormValueChanged}
+                        ></ha-row-selector>
+
+                        <ha-row-selector
+                                .hass=${this.hass}
+                                .selector=${{
+                                    number: {
+                                        min: -180,
+                                        max: 180,
+                                        step: 0.0001,
+                                        mode: "box"
+                                    }
+                                }}
+                                .value=${this.config.weatherConfig?.longitude || 14.4378}
+                                .label=${"Longitude"}
+                                propertyName="weatherConfig.longitude"
+                                @value-changed=${this._handleFormValueChanged}
+                        ></ha-row-selector>
+
+                        <ha-row-selector
+                                .hass=${this.hass}
+                                .selector=${{
+                                    select: {
+                                        options: this._unitsOptions,
+                                        mode: 'dropdown'
+                                    }
+                                }}
+                                .value=${this.config.weatherConfig?.units || 'metric'}
+                                .label=${"Units"}
+                                propertyName="weatherConfig.units"
+                                @value-changed=${this._handleFormValueChanged}
+                        ></ha-row-selector>
+                    ` : ''}
+
+                    ${this.config.weatherProvider === 'pirateweather' ? html`
+                        <ha-row-selector
+                                .hass=${this.hass}
+                                .selector=${{
+                                    text: {
+                                        type: "text"
+                                    }
+                                }}
+                                .value=${this.config.weatherConfig?.apiKey || ''}
+                                .label= ${"API Key"}
+                                .helper= ${"Pirate Weather API Key (get one free at pirateweather.net)"}
                                 propertyName="weatherConfig.apiKey"
                                 @value-changed=${this._handleFormValueChanged}
                         ></ha-row-selector>
